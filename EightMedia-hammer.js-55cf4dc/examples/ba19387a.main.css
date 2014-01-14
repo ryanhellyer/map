@@ -1,0 +1,23 @@
+body {margin:0;padding:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block;margin:0;}
+
+#slider{
+	background: orange;
+}
+
+.swipe {
+	background: #f00;
+	overflow: hidden;
+	visibility: hidden;
+	position: relative;
+}
+.swipe-wrap {
+	overflow: hidden;
+	position: relative;
+}
+.swipe-wrap figure {
+	margin: 0;
+	float:left;
+	width:100%;
+	position: relative;
+}

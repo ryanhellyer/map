@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Swipe is the most accurate touch slider</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel='stylesheet' href='ba19387a.main.css'>
+</head>
+<body>
+
+<div id='slider' class='swipe'>
+	<div class='swipe-wrap'>
+		<figure>
+			<img src="http://swipejs.com/assets/explorations1.jpg" />
+		</figure>
+		<figure>
+			<img src="http://swipejs.com/assets/explorations2.jpg" />
+		</figure>
+		<figure>
+			<img src="http://swipejs.com/assets/fiftyandtwothirds3.jpg" />
+		</figure>
+		<figure>
+			<img src="http://swipejs.com/assets/explorations3.jpg" />
+		</figure>
+	</div>
+</div>
+
+<ul id='position'>
+	<li class='on'></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+
+</nav>
+
+
+<script src='swipe.js'></script>
+<script>
+
+Swipe(document.getElementById('slider'), {
+	auto: 3000,
+	continuous: false,
+	callback: function(pos) {
+
+		var i = bullets.length;
+		while (i--) {
+			bullets[i].className = ' ';
+		}
+		bullets[pos].className = 'on';
+
+	}
+});
+var bullets = document.getElementById('position').getElementsByTagName('li');
+
+</script>
+
+</body>
+</html>

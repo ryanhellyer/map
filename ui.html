@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Tour app UI</title>
+<link rel='stylesheet' href='css/ui.css' type='text/css' media='all' />
+</head>
+<body>
+<style>
+
+</style>
+<script>
+function menu_window_load() {
+	document.getElementById('show-menu').onclick=function(){
+		document.getElementById('main-menu').className='active';
+		document.getElementById('main-content').className='right';
+	};
+	document.getElementById('main-menu-inner').onclick=function(){
+		document.getElementById('main-menu').className='';
+		document.getElementById('main-content').className='';
+	};
+
+	document.getElementById('show-map').onclick=function(){
+		document.getElementById('map').className='active';
+		document.getElementById('main-content').className='left';
+	};
+	document.getElementById('map-inner').onclick=function(){
+		document.getElementById('map').className='';
+		document.getElementById('main-content').className='';
+	};
+}
+window.onload = menu_window_load;
+</script>
+
+<!-- The main menu - left hand side -->
+<nav id="main-menu">
+	<h1>Main menu</h1>
+	<div id="main-menu-inner">
+		<ul>
+			<li>
+				<a href="http://ryanhellyer.net/">
+					<div>
+						<h2>Tour 1</h1>
+						<p>This is some text about the tour. This is some text about the tour. This is some text about the tour. </p>
+					</div>
+					<img src="images/atlas.jpg" />
+				</a>
+			</li>
+			<li><a href="http://geek.ryanhellyer.net/">Tour 2</a></li>
+			<li><a href="http://random.ryanhellyer.net/">Tour 3</a></li>
+			<li><a href="http://de.ryanhellyer.net/">About</a></li>
+		</ul>
+	</div>
+</nav>
+
+<!-- The map - right hand side-->
+<nav id="map">
+	<div id="map-inner">
+		<img src="images/atlas.jpg" />
+	</div>
+</nav>
+
+<!-- The main content area -->
+<div id="main-content">
+	<nav id="quick-menu">
+		<ul>
+			<li id="show-menu"><a href="#">Menu</a></li>
+			<li id="show-map"><a href="#">Map</a></li>
+		</ul>
+	</nav>
+
+
+
+	<div id="location-slider">
+		<div id="location-slider-wrap">
+			<div class="location-slide">
+				<img src="http://swipejs.com/assets/explorations1.jpg" />
+			</div>
+			<div class="location-slide">
+				<img src="http://swipejs.com/assets/explorations2.jpg" />
+			</div>
+			<div class="location-slide">
+				<img src="http://swipejs.com/assets/fiftyandtwothirds3.jpg" />
+			</div>
+			<div class="location-slide">
+				<img src="http://swipejs.com/assets/explorations3.jpg" />
+			</div>
+		</div>
+	</div>
+
+	<ul id='position'>
+		<li class='on'></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+	<div id="location-slider">
+		<div class="location-slide">
+			<div class="slider">
+				<div class="slide">
+					<ximg src="#" />
+					<p>Some information goes here. Some information goes here. Some information goes here.</p>
+					<p>Some information goes here. Some information goes here. Some information goes here.</p>
+				</div><!-- .slide -->
+				<div class="slide">
+					<ximg src="#" />
+					<p>Some information goes here. Some information goes here. Some information goes here.</p>
+					<p>Some information goes here. Some information goes here. Some information goes here.</p>
+				</div><!-- .slide -->
+			</div><!-- .slider -->
+			<p>test</p>
+		</div><!-- .location-slide -->
+		<div class="location-slide">
+			<div class="slider">
+				<div class="slide">
+					<img src="#" />
+					<p>Some information goes here. Some information goes here. Some information goes here.</p>
+					<p>Some information goes here. Some information goes here. Some information goes here.</p>
+				</div><!-- .slide -->
+				<div class="slide">
+					<img src="#" />
+					<p>Some information goes here. Some information goes here. Some information goes here.</p>
+					<p>Some information goes here. Some information goes here. Some information goes here.</p>
+				</div><!-- .slide -->
+			</div><!-- .slider -->
+			<p>test</p>
+		</div><!-- .location-slide -->
+	</div><!-- .location-slider -->
+</div><!-- #main-content -->
+
+<script src='swipe.js'></script>
+<script>
+
+Swipe(document.getElementById('location-slider'), {
+	auto: 3000,
+	continuous: false,
+	callback: function(pos) {
+
+		var i = bullets.length;
+		while (i--) {
+			bullets[i].className = ' ';
+		}
+		bullets[pos].className = 'on';
+
+	}
+});
+var bullets = document.getElementById('position').getElementsByTagName('li');
+
+</script>
+
+</body>
+</html>
