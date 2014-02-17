@@ -45,7 +45,8 @@ a:hover {
 /* =Quick menu
 -------------------------------------------------------------- */
 #quick-menu {
-	background: #ffcccc;
+	background: #fff;
+	border-bottom: 1px solid #ccc;
 	float: left;
 	width: 100%;
 }
@@ -240,4 +241,13 @@ a:hover {
 #location-slider img {
 	width: 100%;
 	height: auto;
+}
+#position li {
+	float: left;
+	width: 20px;
+	height: 20px;
+	background: red;
+}
+#position li.on {
+	background: lime;
 }
