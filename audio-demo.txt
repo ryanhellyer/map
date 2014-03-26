@@ -1,0 +1,178 @@
+You will probably want to use the new HTML5 audio element to create an Audio object, load the mp3, and play it.
+
+Due to browser inconsistencies, this sample code is a bit lengthly, but it should suit your needs with a bit of tweaking.
+
+//Create the audio tag
+var soundFile = document.createElement("audio");
+soundFile.preload = "auto";
+
+//Load the sound file (using a source element for expandability)
+var src = document.createElement("source");
+src.src = fileName + ".mp3";
+soundFile.appendChild(src);
+
+//Load the audio tag
+//It auto plays as a fallback
+soundFile.load();
+soundFile.volume = 0.000000;
+soundFile.play();
+
+//Plays the sound
+function play() {
+   //Set the current time for the audio file to the beginning
+   soundFile.currentTime = 0.01;
+   soundFile.volume = volume;
+
+   //Due to a bug in Firefox, the audio needs to be played after a delay
+   setTimeout(function(){soundFile.play();},1);
+}
+Edit:
+
+To add Flash support, you would append an object element inside the audio tag.
+
+
+
+
+
+
+
+
+<button onClick="document.getElementById("id2").play()">Play</button>
+
+
+
+
+
+
+
+
+
+
+up vote
+6
+down vote
+favorite
+1
+I've got several HTML5 audio elements on a page and am using jQuery to play and pause them. The play and pause functions work appropriately, but the tracks can all be played at the same time.
+
+How can I rewrite this code so that only one song can be played at a time? That is.. if one is playing and you click on another, pause the previous and play the most recent click.
+
+Thank you!
+
+HTML:
+
+<div id="music_right">
+        <div class="thumbnail" id="paparazzi">
+            <a class="playback">
+                <img class="play" src="http://www.lucisz.com/imgs/play.png" />
+            </a>
+            <audio>
+             <source src="../audio/fernando_garibay_paparazzisnlmix.ogg" type="audio/ogg" />
+                <source src="../audio/fernando_garibay_paparazzisnlmix.mp3" type="audio/mpeg" />
+                Your browser does not support HTML5 audio.
+            </audio>
+        </div>
+        <div class="thumbnail" id="danceinthedark">
+            <a class="playback">
+                <img class="play" src="http://www.lucisz.com/imgs/play.png" />
+            </a>
+            <audio>
+             <source src="../audio/fernando_garibay_danceinthedark.ogg" type="audio/ogg" />
+                <source src="../audio/fernando_garibay_danceinthedark.mp3" type="audio/mpeg" />
+                Your browser does not support HTML5 audio.
+            </audio>
+        </div>
+        <div class="thumbnail" id="bornthisway">
+            <a class="playback">
+                <img class="play" src="http://www.lucisz.com/imgs/play.png" />
+            </a>
+            <audio>
+             <source src="../audio/fernando_garibay_bornthisway.ogg" type="audio/ogg" />
+                <source src="../audio/fernando_garibay_bornthisway.mp3" type="audio/mpeg" />
+                Your browser does not support HTML5 audio.
+            </audio>
+        </div>
+    </div>
+JavaScript: (that works, but plays/pauses individually)
+
+$(function() {
+    $(".playback").click(function(e) {
+        e.preventDefault();
+        var song = $(this).next('audio').get(0);
+        if (song.paused)
+            song.play();
+        else
+            song.pause();
+    });
+});
+JavaScript: (ugly concept of mine)
+
+$(function() {
+    $(".playback").click(function(e) {
+        e.preventDefault();
+        var song = $(this).next('audio').get(0);
+        if (song.paused)
+            song.play();
+            song.not($(this).pause();
+        else
+            song.pause();
+    });
+});
+javascript jquery html5 audio playback
+share|improve this question
+edited Apr 19 '11 at 20:03
+
+asked Apr 19 '11 at 19:46
+
+technopeasant
+1,87274190
+ 	
+What have you tried?...no one is going to just write it for you. Well, most people, that is. –  mattsven Apr 19 '11 at 19:52 
+ 	
+@NeXXeuS. I hear you. Tried a few different things all with gross syntax. If/then statements are difficult for me to wrap my head around. I'll add my concept to the question –  technopeasant Apr 19 '11 at 20:00 
+add comment
+2 Answers
+activeoldestvotes
+up vote
+3
+down vote
+accepted
+var curPlaying;
+
+$(function() {
+    $(".playback").click(function(e) {
+        e.preventDefault();
+        var song = $(this).next('audio')[0];
+        if(curPlaying) { $("audio", "#"+curPlaying)[0].pause(); }
+        if(song.paused) { song.play(); } else { song.pause(); }
+        curPlaying = $(this).parent()[0].id;
+    });
+});
+That should work.
+
+EDIT:
+
+var curPlaying;
+
+$(function() {
+    $(".playback").click(function(e) {
+        e.preventDefault();
+        var song = $(this).next('audio')[0];
+        if(song.paused){
+            song.play();
+            if(curPlaying) $("audio", "#"+curPlaying)[0].pause();
+        } else { song.pause(); }
+        curPlaying = $(this).parent()[0].id;
+    });
+});
+
+
+
+
+
+
+
+
+
+
+

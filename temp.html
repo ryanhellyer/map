@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Test</title>
+<style>h2 {background:#ffff77;margin:2px;}pre{background:#eee;}p {background:#ddffdd;}#positions li {background:#00ff00;margin:5px;padding:5px;}</style>
+<link rel='stylesheet' id='style-css'  href='style.css' type='text/css' media='all' />
+
+<script>
+//Create the audio tag
+var soundFile = document.createElement("audio");
+soundFile.preload = "auto";
+
+//Load the sound file (using a source element for expandability)
+var src = document.createElement("source");
+src.src = "music.mp3";
+soundFile.appendChild(src);
+
+//Load the audio tag
+//It auto plays as a fallback
+soundFile.load();
+soundFile.volume = 0.500000;
+soundFile.play();
+
+//Plays the sound
+function play() {
+   //Set the current time for the audio file to the beginning
+   soundFile.currentTime = 0.01;
+   soundFile.volume = volume;
+
+   //Due to a bug in Firefox, the audio needs to be played after a delay
+   setTimeout(function(){soundFile.play();},1);
+}
+
+
+</script>
+
+</head>
+<body>
+
+
+<div id="location-slider">
+	<div id="location-slider-wrap">
+		<div class="location-slide">
+
+			<h2>Zero</h2>
+			<p>I suck quite badly at JavaScript. As a way of improving that, I've started building some applications with raw JavaScript, but am getting caught out by some fundamental gaps in my knowledge, and I'm hoping one of you kind souls out there is able to help me figure out where I'm going wrong :)</p>
+			<br />
+			<p>Clicking the green buttons should navigate you to specific pages. This works fine when I use the following code to do it:</p>
+			<pre>
+document.getElementById('button-0').onclick=function(){
+	mySwipe.slide(0, 400);
+}
+document.getElementById('button-1').onclick=function(){
+	mySwipe.slide(1, 400);
+}</pre>
+			<p>But it fails when I attempt to do it without hard coding in the ID's, like so:</p>
+			<pre>
+	var num_slides = mySwipe.getNumSlides();
+	var i = 0;
+	while (i&lt;num_slides) {
+
+		document.getElementById('button-'+i).onclick=function(){
+			var j = i;
+			console.log(j);
+			mySwipe.slide(j, 1000);
+		}
+
+		i++;
+	}
+</pre>
+			<ul id="positions">
+				<li id="button-0">Zero</li>
+				<li id="button-1">First</li>
+				<li id="button-2">Second</li>
+			</ul>
+
+		</div>
+		<div class="location-slide">
+			<h2>First</h2>
+		</div>
+		<div class="location-slide">
+			<h2>Second</h2>
+		</div>
+	</div>
+</div>
+
+<button id="prev">prev</button>
+<button id="next">next</button>
+
+
+<script type='text/javascript' src='js/swipe.js'></script>
+<script>
+
+function test() {
+
+	/*
+	 * This section works fine
+	 * But I needed to hard code the ID's to make it work :/
+	 *
+	 * This allows you to click the zero and first buttons to navigate to a specific slide in the slideshow
+	 */
+	document.getElementById('button-0').onclick=function(){
+		mySwipe.slide(0, 400);
+	}
+	document.getElementById('button-1').onclick=function(){
+		mySwipe.slide(1, 400);
+	}
+
+	/*
+	 * I assumed this section of code would do exactly the same as the code above, but it does not
+	 * But I needed to hard code the ID's to make it work :/
+	 *
+	 * This was intended to also allow you to navigate to a specific slide, but it was meant to handle however
+	 * many slides were added. But it does not work, as the console.log() always seems to think that i is three :(
+	var num_slides = mySwipe.getNumSlides();
+	var i = 0;
+	while (i<num_slides) {
+
+		document.getElementById('button-'+i).onclick=function(){
+			var j = i;
+			console.log(j);
+			mySwipe.slide(j, 1000);
+		}
+
+		i++;
+	}
+	 */
+
+	document.getElementById('next').onclick=function(){
+		mySwipe.next();
+	}
+	document.getElementById('prev').onclick=function(){
+		mySwipe.prev();
+	}
+
+}
+window.onload = test;
+
+window.mySwipe = Swipe(document.getElementById('location-slider'), {
+	auto: false,
+	continuous: false,
+});
+
+</script>
+
+</body>
+</html>
