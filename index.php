@@ -81,7 +81,10 @@
 	<nav id="quick-menu">
 		<ul>
 			<li id="show-menu"><a href="#">Menu</a></li>
-			<li id="play-current-audio">Play</li>
+			<li id="play-current-audio" class="stopped">
+				<span class="stopped">Play</span>
+				<span class="playing">Stopped</span>
+			</li>
 			<li id="show-map"><a href="#">Map</a></li>
 		</ul>
 	</nav>

@@ -96,6 +96,16 @@ a:hover {
 #quick-menu span {
 	display: none;
 }
+#quick-menu .stopped .playing,
+#quick-menu .playing .stopped {
+	display: none;
+}
+
+#quick-menu .stopped .stopped,
+#quick-menu .playing .playing {
+	display: inline;
+}
+
 
 /* =Map
 -------------------------------------------------------------- */

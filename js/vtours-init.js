@@ -18,6 +18,41 @@ window.mySwipe = Swipe(document.getElementById('location-slider'), {
 
 
 function menu_window_load() {
+	// Create the audio tag
+	var soundFile = document.createElement("audio");
+	soundFile.preload = "auto";
+
+	// Load the sound file (using a source element for expandability)
+	var src = document.createElement("source");
+	src.src = "http://localhost/tours/wp-content/themes/virtual-tours/music.mp3";
+	soundFile.appendChild(src);
+
+	// Load the audio tag
+	// It auto plays as a fallback
+	soundFile.load();
+	soundFile.volume = 0.500000;
+
+
+	// Play the audio
+	document.getElementById('play-current-audio').onclick=function(){
+		var play_button_state = document.getElementById('play-current-audio').className;
+		if('stopped'==play_button_state){
+			document.getElementById('play-current-audio').className='playing';
+
+			soundFile.play();
+
+			//Set the current time for the audio file to the beginning
+			soundFile.currentTime = 0.01;
+
+//			soundFile.stop();
+			//Due to a bug in Firefox, the audio needs to be played after a delay
+			setTimeout(function(){soundFile.play();},1);
+
+		} else {
+			document.getElementById('play-current-audio').className='stopped';
+			soundFile.pause();
+		}
+	}
 
 	// Primary navigation
 	document.getElementById('location-slider').onclick=function(){
@@ -77,11 +112,9 @@ function menu_window_load() {
 
 	/*
 	 * Audio playback
-	 */
 	document.getElementById('play-current-audio').onclick=function(){
 		/*
 		 * Audio play
-		 */
 		//Create the audio tag
 		var soundFile = document.createElement("audio");
 		soundFile.preload = "auto";
@@ -104,6 +137,7 @@ function menu_window_load() {
 		//Due to a bug in Firefox, the audio needs to be played after a delay
 		setTimeout(function(){soundFile.play();},1);
 	}
+	 */
 
 }
 window.onload = menu_window_load;
@@ -190,3 +224,13 @@ function map_display_map() {
 	return ryans_map;
 }
 
+// Plays the sound
+function play() {
+
+	// Set the current time for the audio file to the beginning
+	soundFile.currentTime = 0.01;
+	soundFile.volume = volume;
+
+	// Due to a bug in Firefox, the audio needs to be played after a delay
+	setTimeout(function(){soundFile.play();},1);
+}
