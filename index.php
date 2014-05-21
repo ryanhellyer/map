@@ -81,6 +81,7 @@
 	<nav id="quick-menu">
 		<ul>
 			<li id="show-menu"><a href="#">Menu</a></li>
+			<li id="restart-current-audio"> Restart</li>
 			<li id="play-current-audio" class="stopped">
 				<span class="stopped">Play</span>
 				<span class="playing">Stopped</span>

@@ -32,11 +32,28 @@ function menu_window_load() {
 	soundFile.load();
 	soundFile.volume = 0.500000;
 
+	// Play the audio
+	document.getElementById('restart-current-audio').onclick=function(){
+		soundFile.currentTime = 0; // Resets it to start
+	}
 
 	// Play the audio
 	document.getElementById('play-current-audio').onclick=function(){
 		var play_button_state = document.getElementById('play-current-audio').className;
 		if('stopped'==play_button_state){
+
+			var elements = document.getElementsByClassName('location-slide');
+
+			Array.prototype.forEach.call(elements, function(element) {
+				// Do stuff with the element
+				style = window.getComputedStyle(element), // Check first
+				console.log(style);
+				top = style.getPropertyValue('-webkit-transform');
+			//	console.log( top);
+			//	die;
+			//	console.log(element.tagName);
+			});
+
 			document.getElementById('play-current-audio').className='playing';
 
 			soundFile.play();
@@ -51,6 +68,7 @@ function menu_window_load() {
 		} else {
 			document.getElementById('play-current-audio').className='stopped';
 			soundFile.pause();
+			audio.currentTime = 0; // Resets it to start
 		}
 	}
 
